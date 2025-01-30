@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html , body {
+    font-family: "Montserrat", serif;
+}
+
+.botaoMenu {
+    width: 40px;
+    height: 40px;
+    padding: 5px;   
+}
+
+.botaoAzul {
+    background-color: blue;
+}
+
+.navbar{
+    background-color: #B1FFFF !important;
+}
+
+.add_button{
+    text-align: right;
+}
