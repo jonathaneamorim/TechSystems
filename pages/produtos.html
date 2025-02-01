@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <!-- Nome do sistema -->
             <div>
-                <a class="navbar-brand">TechSystems</a>
+                <a class="h2 text-decoration-none" href="../index.html">TechSystems</a>
             </div>
             <!-- Botão do menu lateral -->
             <div>
@@ -31,7 +31,7 @@
             </div>
         </div>
     </nav>
-
+    
     <!-- Menu lateral (offcanvas) -->
     <div class="offcanvas offcanvas-start" id="offcanvasExample">
         <div class="offcanvas-header">
@@ -40,35 +40,44 @@
         </div>
         <div class="offcanvas-body">
             <div>
-                <!-- Conteúdo do menu lateral -->
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+                <ul class="list-group gap-3">
+                    <a class="text-decoration-none rounded" href="../index.html"><li class="list-group-item">Home</li></a>
+                    <a class="text-decoration-none rounded" href="/pages/produtos.html"><li class="list-group-item">Produtos</li></a>
+                    <a class="text-decoration-none rounded" href="/pages/assistencia.html"><li class="list-group-item">Assistencia</li></a>
+                    <a class="text-decoration-none rounded" href="/pages/pedidos.html"><li class="list-group-item">Pedidos</li></a>
+                    <a class="text-decoration-none rounded" href="/pages/entregas.html"><li class="list-group-item">Entregas</li></a>
+                  </ul>
             </div>
         </div>
     </div>
     
     <!-- Seção de produtos -->
     <div class="container mt-4">
-        <h2>Pedidos</h2>
+        <div class="d-flex justify-content-between">
+            <h2>Produtos</h2>
 
-        <div add_button>
-            <img src="media/svg/add.png" alt="adicionar">
+            <div add_button>
+                <button class="btn btn-primary d-flex align-items-center gap-2"><img src="/media/svg/add.png" alt="adicionar"> Adicionar</button>
+            </div>
         </div>
 
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead class="table-light">
                     <tr>
-                        <th>Data do Pedidos</th>
-                        <th>Código do Pedido</th>
-                        <th>Nome do Cliente</th>
-                        <th>Observação</th>
-                        <th>Endereço</th>
+                        <th>Código do Produto</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Quantidade Disponível</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
+
+            <div id="infoUser"></div>
+
         </div>
     </div>
     
@@ -78,6 +87,6 @@
     
     <!-- Incluído na importação o parâmetro type="module", ele indica que o arquivo importado importará outros arquivos.-->
     <!-- Script personalizado -->
-    <script type="module" src="javascript/index.js"></script>
+    <script type="module" src="../Javascript/index.js"></script>
 </body>
 </html>
