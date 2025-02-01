@@ -25,3 +25,43 @@ html , body {
 .add_button{
     text-align: right;
 }
+
+.sobre {
+    display: flex;
+}
+
+.sobreEsquerdo {
+    width: 70%;
+
+    height: 60vh;
+}
+
+.sobreDireito {
+    width: 30%;
+    height: 60vh;
+}
+
+.titles {
+    text-decoration: underline;
+    font-size: 36px;
+}
+
+.list-item {
+    width: 200px;
+    height: 40px;
+    background-color: #B1FFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border-radius: 12px;
+}
+
+#offcanvasExample {
+    background-color: #96E7F0;
+}
+
+.list-group-item {
+    background-color: #B1FFFF;
+    border: 1px solid black;
+}
