@@ -46,7 +46,7 @@
                     <a class="text-decoration-none rounded" href="/pages/assistencia.html"><li class="list-group-item">Assistencia</li></a>
                     <a class="text-decoration-none rounded" href="/pages/pedidos.html"><li class="list-group-item">Pedidos</li></a>
                     <a class="text-decoration-none rounded" href="/pages/entregas.html"><li class="list-group-item">Entregas</li></a>
-                  </ul>
+                </ul>
             </div>
         </div>
     </div>
@@ -55,9 +55,11 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-between">
             <h2>Produtos</h2>
-
-            <div add_button>
-                <button class="btn btn-primary d-flex align-items-center gap-2"><img src="/media/svg/add.png" alt="adicionar"> Adicionar</button>
+            <div>
+                <!-- Botão para abrir modal centralizado -->
+                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                    <img src="/media/svg/add.png" alt="adicionar"> Adicionar
+                </button>
             </div>
         </div>
 
@@ -77,16 +79,64 @@
             </table>
 
             <div id="infoUser"></div>
+        </div>
+    </div>
 
+    <!-- Modal centralizado -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Detalhes do Produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nome</label>
+                                <input type="text" class="form-control" placeholder="Placa de vídeo">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preço</label>
+                                <input type="text" class="form-control" placeholder="R$ 230">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Modelo</label>
+                                <input type="text" class="form-control" placeholder="RTX-5090">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Marca</label>
+                                <input type="text" class="form-control" placeholder="NVIDIA">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Código do Produto</label>
+                                <input type="text" class="form-control" placeholder="545343">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Garantia em dias</label>
+                                <input type="text" class="form-control" placeholder="60">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Descrição</label>
+                                <textarea class="form-control" rows="3" style="resize: none;" placeholder="Placa de vídeo com alta performance."></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Informações adicionais</label>
+                                <textarea class="form-control" style="resize: none;" rows="3" placeholder="Quase ninguem tem 700 dols no bolso."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- Importação dos scripts do Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    
-    <!-- Incluído na importação o parâmetro type="module", ele indica que o arquivo importado importará outros arquivos.-->
-    <!-- Script personalizado -->
     <script type="module" src="../Javascript/index.js"></script>
 </body>
 </html>
