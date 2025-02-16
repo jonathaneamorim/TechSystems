@@ -57,7 +57,7 @@
             <h2>Produtos</h2>
             <div>
                 <!-- Botão para abrir modal centralizado -->
-                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalNovoProduto">
                     <img src="/media/svg/add.png" alt="adicionar"> Adicionar
                 </button>
             </div>
@@ -79,58 +79,65 @@
             </table>
 
             <div id="infoUser"></div>
+            
         </div>
     </div>
 
     <!-- Modal centralizado -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal modal-lg fade" id="modalNovoProduto" tabindex="-1" aria-labelledby="tituloModalNovoProduto" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Detalhes do Produto</h5>
+                    <h5 class="modal-title" id="tituloModalNovoProduto">Inserir Produto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Nome</label>
-                                <input type="text" class="form-control" placeholder="Placa de vídeo">
+                                <input type="text" class="form-control" id="nomeProduto">
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label">Preço</label>
-                                <input type="text" class="form-control" placeholder="R$ 230">
+                                <input type="text" class="form-control" id="precoProduto">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Quantidade</label>
+                                <input type="text" class="form-control" id="quantidadeProduto">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Modelo</label>
-                                <input type="text" class="form-control" placeholder="RTX-5090">
+                                <input type="text" class="form-control" id="modeloProduto">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Marca</label>
-                                <input type="text" class="form-control" placeholder="NVIDIA">
+                                <input type="text" class="form-control" id="marcaProduto">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Código do Produto</label>
-                                <input type="text" class="form-control" placeholder="545343">
+                                <input type="text" class="form-control" placeholder="Geração Automatica caso vazio" id="codigoProduto">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Garantia em dias</label>
-                                <input type="text" class="form-control" placeholder="60">
+                                <input type="text" class="form-control" id="garantiaProduto">
                             </div>
+                           
                             <div class="col-md-6">
                                 <label class="form-label">Descrição</label>
-                                <textarea class="form-control" rows="3" style="resize: none;" placeholder="Placa de vídeo com alta performance."></textarea>
+                                <textarea class="form-control" rows="3" style="resize: none;" id="descricaoProduto"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Informações adicionais</label>
-                                <textarea class="form-control" style="resize: none;" rows="3" placeholder="Quase ninguem tem 700 dols no bolso."></textarea>
+                                <textarea class="form-control" style="resize: none;" rows="3" id="infoAdicionaisProduto"></textarea>
                             </div>
+                
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-primary" id="botaoSalvarProduto">Salvar</button>
                 </div>
             </div>
         </div>

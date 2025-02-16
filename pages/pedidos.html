@@ -56,8 +56,11 @@
         <div class="d-flex justify-content-between">
             <h2>Pedidos</h2>
 
-            <div add_button>
-                <button class="btn btn-primary d-flex align-items-center gap-2"><img src="/media/svg/add.png" alt="adicionar"> Adicionar</button>
+            <div>
+                <!-- Botão para abrir modal centralizado -->
+                <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalNovoPedido">
+                    <img src="/media/svg/add.png" alt="adicionar"> Adicionar
+                </button>
             </div>
         </div>
 
@@ -82,6 +85,55 @@
         </div>
     </div>
     
+
+
+    <!-- Modal centralizado -->
+    <div class="modal modal-lg fade" id="modalNovoPedido" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Inserir Produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Nome do Cliente</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email do Cliente</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Telefone do Cliente</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Data do pedido</label>
+                                <input type="text" class="form-control">
+                            </div>
+
+                            <div class="col-md-12" id="productList">
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-label">Observação</label>
+                                <textarea class="form-control" style="resize: none;" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Importação dos scripts do Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
