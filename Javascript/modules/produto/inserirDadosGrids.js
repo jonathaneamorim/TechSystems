@@ -1,7 +1,9 @@
 import { editarProduto, excluirProduto, exibirInfoProdutos } from "./manipularProdutos.js";
 
-export function renderGridProducts() {
-    const productGridElement = document.querySelector('#corpoGridProduto');
+const productGridElement = document.getElementById('corpoGridProduto');
+
+export const renderGridProducts = () => {
+
     var dadosLocalStorage = JSON.parse(localStorage.getItem('data'));
     var produtos = dadosLocalStorage.produto;
 
@@ -57,7 +59,6 @@ export function renderGridProducts() {
 }
 
 export function renderGridPedidos() {
-    const productGridElement = document.querySelector('#corpoGridProduto');
 
     var dadosLocalStorage = JSON.parse(localStorage.getItem('data'));
 

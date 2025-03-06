@@ -1,53 +1,69 @@
-import { Produto } from "../Entities/produto.js";
+import { Produto } from "../../Entities/produto.js";
 import { gerarCodigoProduto } from "./gerarCodigo.js";
 import { renderGridProducts } from "./inserirDadosGrids.js";
 
 const espacoInfoProduto = document.querySelector('#dataInfoProduto');
 const tituloModal = document.querySelector('#tituloVisualizacaoProduto');
-const modal = new bootstrap.Modal(document.getElementById('modalProduto'));
 const botaoSalvar = document.getElementById('botaoSalvarModalProdutos');
+
+const modalProduto = new bootstrap.Modal(document.getElementById('modalProduto'));
+const modalNovoProduto = new bootstrap.Modal(document.getElementById('modalNovoProduto'));
+
+const fecharModais = () => {
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+    modalNovoProduto.hide();
+    modalProduto.hide();
+}
 
 // Função criada para salvar um produto na base de dados
 export const inserirNovoProduto = () => {
     try {
-
-        const modalNovoProduto = bootstrap.Modal.getInstance(document.getElementById('modalNovoProduto'));
-        let dataLocalStorage = JSON.parse(localStorage.getItem('data'));
-
-        var campoNomeProduto = document.querySelector("#campoNomeProduto").value;
-        var campoPrecoProduto = document.querySelector("#campoPrecoProduto").value;
-        var campoMarcaProduto = document.querySelector("#campoMarcaProduto").value;
-        var campoQuantidadeProduto = document.querySelector("#campoQuantidadeProduto").value;
-        var campoModeloProduto = document.querySelector("#campoModeloProduto").value;
-        var campoCodigoProduto = document.querySelector("#campoCodigoProduto").value;
-        var campoGarantiaProduto = document.querySelector("#campoGarantiaProduto").value;
-        var campoDescricaoProduto = document.querySelector("#campoDescricaoProduto").value;
-        var campoInfoProduto  = document.querySelector("#campoInfoProduto").value;
-
-        let listaProdutos = dataLocalStorage.produto;
+        let dadosStorage = JSON.parse(localStorage.getItem('data'));
+        let listaProdutos = dadosStorage.produto;
         let listaDeCodigos = listaProdutos.map(n => n.cod_produto);
 
-        if(campoCodigoProduto === '') {
-            campoCodigoProduto = gerarCodigoProduto();
-            const produto = new Produto(campoCodigoProduto, campoNomeProduto, campoDescricaoProduto, campoQuantidadeProduto, campoPrecoProduto, campoMarcaProduto, campoModeloProduto, campoGarantiaProduto, campoInfoProduto);
-            dataLocalStorage.produto.push(produto);
-            localStorage.setItem('data', JSON.stringify(dataLocalStorage));
-            renderGridProducts();
-            modalNovoProduto.hide();
-            limparModalNovoProduto();
-        } else {
-            if(!(listaDeCodigos.includes(campoCodigoProduto))) {
-                const produto = new Produto(campoCodigoProduto, campoNomeProduto, campoDescricaoProduto, campoQuantidadeProduto, campoPrecoProduto, campoMarcaProduto, campoModeloProduto, campoGarantiaProduto, campoInfoProduto);
-                dataLocalStorage.produto.push(produto);
-                localStorage.setItem('data', JSON.stringify(dataLocalStorage));
-                renderGridProducts();
-                modalNovoProduto.hide();
-                limparModalNovoProduto();
-            } else {
-                alert("Este código já está sendo utilizado, por favor utilize outro código!");
-                document.querySelector("#campoCodigoProduto").value = '';
-            }
+        const campos = {
+            nome: document.querySelector("#campoNomeProduto").value,
+            preco: document.querySelector("#campoPrecoProduto").value,
+            marca: document.querySelector("#campoMarcaProduto").value,
+            quantidade: document.querySelector("#campoQuantidadeProduto").value,
+            modelo: document.querySelector("#campoModeloProduto").value,
+            codigo: document.querySelector("#campoCodigoProduto").value,
+            garantia: document.querySelector("#campoGarantiaProduto").value,
+            descricao: document.querySelector("#campoDescricaoProduto").value,
+            info: document.querySelector("#campoInfoProduto").value
         }
+
+        if(campos.codigo === '') {
+            campos.codigo = gerarCodigoProduto();
+        } else if(listaDeCodigos.includes(campos.codigo)) {
+            alert("Este código já está sendo utilizado, por favor utilize outro código!");
+            document.querySelector("#campoCodigoProduto").value = '';
+            return;
+        }
+
+        let produto = new Produto(
+            campos.codigo, 
+            campos.nome, 
+            campos.descricao, 
+            campos.quantidade, 
+            campos.preco, 
+            campos.marca, 
+            campos.modelo, 
+            campos.garantia, 
+            campos.info
+        );
+
+        dadosStorage.produto.push(produto);
+
+        localStorage.setItem('data', JSON.stringify(dadosStorage));
+
+        renderGridProducts();
+
+        limparModalNovoProduto();
+
+        fecharModais();
     } catch(e) {
         console.log('Error: ', e);
     }
@@ -63,14 +79,14 @@ export const exibirInfoProdutos = (cod_produto) => {
         // Aplica o título e o conteudo da modal
         tituloModal.innerText = "Visualizar informações do produto";
 
-        renderForm(produto, true)
+        renderForm(produto, true);
         
         // Esconde o botão de Salvar e exibe a modal
         botaoSalvar.style.display = 'none';
-        modal.show();
+        modalProduto.show();
 
     } catch(e) {
-        console.log('Error: ', e);
+        console.log('Erro ao exibir informações do produto: ', e);
     }
 }
 
@@ -88,28 +104,26 @@ export const editarProduto = (cod_produto) => {
         // Exibe o botão de Salvar e exibe a modal
         botaoSalvar.style.display = 'inherit';
 
-        modal.show();
+        modalProduto.show();
 
     } catch(e) {
-        console.log('Error: ', e);
+        console.log('Erro ao editar produto: ', e);
     }
 }
 
 export const excluirProduto = (cod_produto) => {
     try {
+    
         let dadosStorage = JSON.parse(localStorage.getItem('data'));
 
-        console.log(dadosStorage);
-        
         let listaProdutos = dadosStorage.produto;
         
         let index = listaProdutos.findIndex(n => n.cod_produto = cod_produto);
 
-        delete listaProdutos[index];
+        listaProdutos.splice(index, 1);
 
-        if(listaProdutos == '' || listaProdutos == null) {
+        if(listaProdutos == '' || listaProdutos == null) 
             listaProdutos = [];
-        }
 
         dadosStorage.produto = listaProdutos;
 
@@ -120,15 +134,16 @@ export const excluirProduto = (cod_produto) => {
         alert('Produto excluido com sucesso!');
 
     } catch(e) {
-        console.log('Error: ', e);
+
+        console.log('Erro ao excluir produto: ', e);
+
     }
 }
 
 const findProduct = (cod_produto) => {
     try {
         // Capturar a informação atualizada do localstorage
-        let dataLocalStorage = JSON.parse(localStorage.getItem('data'));
-        let listaProdutos = dataLocalStorage.produto;
+        let listaProdutos = capturarListaProdutos();
     
         // Encontra na lista de produtos o produto selecionado
         let produto = listaProdutos.find(n => n.cod_produto == cod_produto);
@@ -155,35 +170,53 @@ const limparModalNovoProduto = () => {
     document.querySelector("#campoInfoProduto").value = '';
 }
 
+export const capturarListaProdutos = () => {
+    let dadosStorage = JSON.parse(localStorage.getItem('data'));
+    let listaProdutos = dadosStorage.produto;
+    return listaProdutos;
+}
+
 export const salvarEdicaoProduto = () => {
     try {
         // Capturar a informação atualizada do localstorage
-        let dataLocalStorage = JSON.parse(localStorage.getItem('data'));
-        let listaProdutos = dataLocalStorage.produto;
+        let dadosStorage = JSON.parse(localStorage.getItem('data'));
+        let listaProdutos = dadosStorage.produto;
 
-        let campoNomeProduto = document.querySelector("#campoNomeProdutoEditar").value;
-        let campoPrecoProduto = document.querySelector("#campoPrecoProdutoEditar").value;
-        let campoMarcaProduto = document.querySelector("#campoMarcaProdutoEditar").value;
-        let campoQuantidadeProduto = document.querySelector("#campoQuantidadeProdutoEditar").value;
-        let campoModeloProduto = document.querySelector("#campoModeloProdutoEditar").value;
-        let campoCodigoProduto = document.querySelector("#campoCodigoProdutoEditar").value;
-        let campoGarantiaProduto = document.querySelector("#campoGarantiaProdutoEditar").value;
-        let campoDescricaoProduto = document.querySelector("#campoDescricaoProdutoEditar").value;
-        let campoInfoProduto  = document.querySelector("#campoInfoProdutoEditar").value;
+        const campos = {
+            nome: document.querySelector("#campoNomeProdutoEditar").value,
+            preco: document.querySelector("#campoPrecoProdutoEditar").value,
+            marca: document.querySelector("#campoMarcaProdutoEditar").value,
+            quantidade: document.querySelector("#campoQuantidadeProdutoEditar").value,
+            modelo: document.querySelector("#campoModeloProdutoEditar").value,
+            codigo: document.querySelector("#campoCodigoProdutoEditar").value,
+            garantia: document.querySelector("#campoGarantiaProdutoEditar").value,
+            descricao: document.querySelector("#campoDescricaoProdutoEditar").value,
+            info: document.querySelector("#campoInfoProdutoEditar").value
+        }
 
-        let produtoEditado = new Produto(campoCodigoProduto, campoNomeProduto, campoDescricaoProduto, campoQuantidadeProduto, campoPrecoProduto, campoMarcaProduto, campoModeloProduto, campoGarantiaProduto, campoInfoProduto);
+        let produtoEditado = new Produto(
+            campos.codigo, 
+            campos.nome, 
+            campos.descricao, 
+            campos.quantidade, 
+            campos.preco, 
+            campos.marca, 
+            campos.modelo, 
+            campos.garantia, 
+            campos.info
+        );
 
-        let index = listaProdutos.findIndex(item => item.cod_produto == campoCodigoProduto);
+        let index = listaProdutos.findIndex(item => item.cod_produto == campos.codigo);
 
         listaProdutos[index] = produtoEditado;
 
-        localStorage.setItem('data', JSON.stringify(dataLocalStorage));
+        localStorage.setItem('data', JSON.stringify(dadosStorage));
 
         renderGridProducts();
 
-        modal.hide();
+        modalProduto.hide();
     } catch(e) {
-        console.log('Error: ', e);
+        console.log('Erro ao editar produto: ', e);
     }
 }
 
